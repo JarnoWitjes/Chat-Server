@@ -2,6 +2,7 @@ package nl.saxion.internettech.server.main.client;
 
 import nl.saxion.internettech.server.main.logger.Logger;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -12,21 +13,15 @@ public class User {
     private Logger logger;
 
     private PrintWriter writer;
+    private BufferedReader reader;
 
-    private boolean loggedIn = false;
 
-    private User(Socket clientSocket) {
+    public User(String userName, PrintWriter writer, BufferedReader reader) {
+        this.userName = userName;
+        this.writer = writer;
+        this.reader = reader;
+
         logger = Logger.getInstance();
-
-        try {
-            writer = new PrintWriter(clientSocket.getOutputStream());
-        } catch (IOException e) {
-            logger.logError("Could not setup new user.");
-        }
-    }
-
-    public static User setupUser(Socket clientSocket) {
-        return new User(clientSocket);
     }
 
     //Getters
