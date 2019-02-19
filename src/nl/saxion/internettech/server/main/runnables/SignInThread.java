@@ -71,7 +71,7 @@ public class SignInThread implements Runnable {
     }
 
     private void sendWelcomeMessage() {
-        writer.println("HELO Welcome the chat server!");
+        writer.println("HELO ");
         writer.flush();
     }
 

@@ -2,6 +2,7 @@ package nl.saxion.internettech.server.main;
 
 import nl.saxion.internettech.server.main.client.User;
 import nl.saxion.internettech.server.main.logger.Logger;
+import nl.saxion.internettech.server.main.runnables.SignInThread;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -24,6 +25,8 @@ public class Main {
         clients = new ArrayList<>();
 
         try {
+            logger.setLogLevel(Logger.LOG_LEVEL_DEBUG);
+
             serverSocket = new ServerSocket(1337);
 
             logger.logInfo("Server has started!");
@@ -48,6 +51,10 @@ public class Main {
             try {
                 Socket clientSocket = serverSocket.accept();
                 logger.logInfo("Accepted new client");
+
+                SignInThread signInThread = new SignInThread(clientSocket);
+                Thread thread = new Thread(signInThread);
+                thread.start();
 
             } catch (IOException e) {
                 logger.logError("Could not accept new client.");

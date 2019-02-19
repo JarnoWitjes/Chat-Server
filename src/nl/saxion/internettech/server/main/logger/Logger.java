@@ -5,6 +5,7 @@ public class Logger {
     public static final int LOG_LEVEL_ERROR = 0;
     public static final int LOG_LEVEL_WARNING = 1;
     public static final int LOG_LEVEL_INFO = 2;
+    public static final int LOG_LEVEL_DEBUG = 3;
 
     private int logLevel;
 
@@ -49,8 +50,16 @@ public class Logger {
         }
     }
 
+    public void logDebug(String message) {
+        if (logLevel >= LOG_LEVEL_DEBUG) {
+            System.out.println(ConsoleColors.PURPLE_BOLD + "[DEBUG] "
+            + ConsoleColors.PURPLE + message
+            + ConsoleColors.RESET);
+        }
+    }
+
     public void setLogLevel(int level) {
-        if (level >= 0 && level <= 2) {
+        if (level >= 0 && level <= 3) {
             logLevel = level;
         }
     }

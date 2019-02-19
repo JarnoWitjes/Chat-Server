@@ -1,6 +1,7 @@
 package nl.saxion.internettech.server.main.client;
 
 import nl.saxion.internettech.server.main.logger.Logger;
+import nl.saxion.internettech.server.main.runnables.UserHandlerThread;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class User {
     private PrintWriter writer;
     private BufferedReader reader;
 
+    private UserHandlerThread handler;
 
     public User(String userName, PrintWriter writer, BufferedReader reader) {
         this.userName = userName;
@@ -22,6 +24,10 @@ public class User {
         this.reader = reader;
 
         logger = Logger.getInstance();
+
+        handler = new UserHandlerThread(this, reader);
+        Thread thread = new Thread(handler);
+        thread.start();
     }
 
     //Getters
