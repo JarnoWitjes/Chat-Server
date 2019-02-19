@@ -41,7 +41,7 @@ public class UserHandlerThread implements Runnable {
                 logger.logWarning("Handler " + client.getUserName() + " could not read line!");
             }
 
-            
+
         }
     }
 }
