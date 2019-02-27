@@ -1,5 +1,7 @@
 package nl.saxion.internettech.server.main.logger;
 
+import nl.saxion.internettech.server.main.logger.data.ConsoleColors;
+
 public class Logger {
 
     public static final int LOG_LEVEL_ERROR = 0;

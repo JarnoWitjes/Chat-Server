@@ -1,4 +1,4 @@
-package nl.saxion.internettech.server.main.logger;
+package nl.saxion.internettech.server.main.logger.data;
 
 /**
  * Class has all ANSI escape codes for colors in the console
@@ -6,6 +6,10 @@ package nl.saxion.internettech.server.main.logger;
  * @author jarnowitjes on 2018-12-18
  */
 public class ConsoleColors {
+
+    private ConsoleColors()
+    {}
+
     // Reset
     public static final String RESET = "\033[0m";  // Text Reset
 
