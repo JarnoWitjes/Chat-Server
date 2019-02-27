@@ -16,6 +16,7 @@ public class SignInThread implements Runnable {
 
     private Logger logger;
 
+    private Socket clientSocket;
     private PrintWriter writer;
     private BufferedReader reader;
 
@@ -23,6 +24,7 @@ public class SignInThread implements Runnable {
 
     public SignInThread(Socket clientSocket) throws IOException  {
         logger = Logger.getInstance();
+        this.clientSocket = clientSocket;
         writer = new PrintWriter(clientSocket.getOutputStream());
         reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     }
@@ -37,7 +39,7 @@ public class SignInThread implements Runnable {
         String userName = readUserName();
         sendEncodedUserName(userName);
 
-        User client = new User(userName, writer, reader);
+        User client = new User(userName, writer, reader, clientSocket);
         Main.clients.add(client);
         logger.logInfo("New user signed in: " + userName);
     }
